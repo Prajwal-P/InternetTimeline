@@ -1,6 +1,6 @@
 const express = require('express');
 const multer = require('multer');
-// const mysqlConnection = require('../connection.js');
+const mysqlConnection = require('../connection.js');
 
 const upload = multer();
 
