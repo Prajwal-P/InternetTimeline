@@ -1,0 +1,30 @@
+{
+  "name": "internettimeline",
+  "version": "1.0.0",
+  "description": "A website to show evolution of internet using timeline built in a coding compitation",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "node index.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm start\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Prajwal-P/InternetTimeline.git"
+  },
+  "author": "Prajwal.P",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Prajwal-P/InternetTimeline/issues"
+  },
+  "homepage": "https://github.com/Prajwal-P/InternetTimeline#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "concurrently": "^5.2.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "multer": "^1.4.2",
+    "mysql": "^2.18.1"
+  }
+}
