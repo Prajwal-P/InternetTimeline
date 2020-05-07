@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import SignUp from './Components/SignUp.js';
+import SignIn from './Components/SignIn.js';
+import ForgotPassword from './Components/ForgotPassword.js';
+// import Dashboard from './Components/Dashboard.js';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  render() {
+    return (
+      <React.Fragment>
+        <Router>
+          <Switch>
+            <Route exact path="/" component={SignIn} />
+            <Route path="/signUp" component={SignUp} />
+            <Route path="/forgotPassword" component={ForgotPassword} />>
+            {/* <Route path="/Dashboard" component={Dashboard} /> */}
+            <Route>
+              <h1>Invalid request</h1>
+            </Route>
+          </Switch>
+        </Router>
+      </React.Fragment>
+    );
+  }
 }
 
 export default App;
