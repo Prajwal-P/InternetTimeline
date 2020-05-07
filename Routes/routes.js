@@ -15,7 +15,7 @@ router.get('/test', function (req, res) {
 
 router.post('/signup', upload.none(), function (req, res) {
     const { first_name, last_name, email, password } = req.body;
-    var hashedPassword = crypto.createHash('sha256').update(password).digest('hex');
+    let hashedPassword = crypto.createHash('sha256').update(password).digest('hex');
     sql = "INSERT INTO `users`(first_name, last_name, email, password) VALUES ('" + first_name + "' , '" + last_name + "' , '" + email + "' ,'" + hashedPassword + "')";
     mysqlConnection.query(sql, function (error, result) {
         if (error) {
@@ -33,8 +33,8 @@ router.post('/signup', upload.none(), function (req, res) {
 
 router.post('/signin', upload.none(), function (req, res) {
     const { email, password } = req.body;
-    var hashedPassword = crypto.createHash('sha256').update(password).digest('hex');
-    var sql = "select * from users where email ='" + email + "'";
+    let hashedPassword = crypto.createHash('sha256').update(password).digest('hex');
+    sql = "select * from users where email ='" + email + "'";
     mysqlConnection.query(sql, function (error, result) {
         if (error) {
             res.send({ data: "", status: 404, message: 'error in query' });
@@ -74,7 +74,7 @@ router.post('/signin', upload.none(), function (req, res) {
 
 router.get('/checkEmail', function (req, res) {
     email = req.query.email;
-    let sql = "select * from users where email='" + email + "'";
+    sql = "select * from users where email='" + email + "'";
     mysqlConnection.query(sql, function (error, rows) {
         if (error) {
             res.send({ data: "", status: 404, message: 'error in query' })
@@ -93,12 +93,43 @@ router.get('/checkEmail', function (req, res) {
 router.put('/changePassword', upload.none(), function (req, res) {
     const { email, password } = req.body;
     var hashedPassword = crypto.createHash('sha256').update(password).digest('hex');
-    let sql = "update users set password = '" + hashedPassword + "' where email='" + email + "'";
+    sql = "update users set password = '" + hashedPassword + "' where email='" + email + "'";
     mysqlConnection.query(sql, function (error, rows) {
         if (error) {
             res.send('error in query');
         } else {
             res.send({ data: "", status: 200, message: 'Password changed' });
+        }
+    });
+});
+
+router.post('/insert', upload.none(), function(req, res){
+    const { name, year, img_url, description, link } = req.body;
+    sql = "INSERT INTO `timeline`(name, year, img_url, description, link) VALUES ('" + name + "' , '" + year + "' , '" + img_url + "' ,'" + description + "' ,'" + link + "')";
+    mysqlConnection.query(sql, function(error, result){
+        if(error){
+            res.send({ data: [], status: 401, message: "Event already exists" });
+        } else {
+
+            sql = "Select * from timeline;";
+            mysqlConnection.query(sql, function (error, result1) {
+                if (error) console.log(error);
+                res.send({ data: result1, status: 201, message: "Data Inserted" });
+            })
+        }
+    })
+})
+
+router.get('/allEvents', function (req, res) {
+    sql = "SELECT * FROM timeline ORDER BY year ASC, name ASC;";
+    mysqlConnection.query(sql, function (error, rows) {
+        if (error)
+            res.send("Error in query");
+        else {
+            if (rows <= 0)
+                res.json({ data: [], status: 404, message: "No data found " });
+            else
+                res.json({ data: rows, status: 200, message: "ok" });
         }
     });
 });

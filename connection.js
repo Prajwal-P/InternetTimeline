@@ -21,7 +21,18 @@ conn.connect(function(err) {
                     UNIQUE (email)
                 )auto_increment = 2000;`;
 
+    let timeline = `CREATE TABLE IF NOT EXISTS timeline(
+                        name VARCHAR(20) NOT NULL,
+                        year YEAR NOT NULL,
+                        img_url VARCHAR(50) NOT NULL,
+                        description VARCHAR(50) NOT NULL,
+                        link VARCHAR(50) NOT NULL,
+                    PRIMARY KEY (name));`
+
     conn.query(user, function(err, result){
+        if(err) console.log(err);
+    })
+    conn.query(timeline, function(err, result){
         if(err) console.log(err);
     })
 })
