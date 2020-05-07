@@ -72,5 +72,35 @@ router.post('/signin', upload.none(), function (req, res) {
     });
 });
 
+router.get('/checkEmail', function (req, res) {
+    email = req.query.email;
+    let sql = "select * from users where email='" + email + "'";
+    mysqlConnection.query(sql, function (error, rows) {
+        if (error) {
+            res.send({ data: "", status: 404, message: 'error in query' })
+        }
+        else {
+            if (rows <= 0) {
+                res.send({ data: "", status: 401, message: 'Email does not exist\nPlease register first' });
+            }
+            else {
+                res.send({ data: "", status: 200, message: 'ok' });
+            }
+        }
+    });
+});
+
+router.put('/changePassword', upload.none(), function (req, res) {
+    const { email, password } = req.body;
+    var hashedPassword = crypto.createHash('sha256').update(password).digest('hex');
+    let sql = "update users set password = '" + hashedPassword + "' where email='" + email + "'";
+    mysqlConnection.query(sql, function (error, rows) {
+        if (error) {
+            res.send('error in query');
+        } else {
+            res.send({ data: "", status: 200, message: 'Password changed' });
+        }
+    });
+});
 
 module.exports = router;
