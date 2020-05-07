@@ -5,7 +5,7 @@ import './App.css';
 import SignUp from './Components/SignUp.js';
 import SignIn from './Components/SignIn.js';
 import ForgotPassword from './Components/ForgotPassword.js';
-// import Dashboard from './Components/Dashboard.js';
+import Dashboard from './Components/Dashboard.js';
 
 class App extends Component {
   render() {
@@ -16,7 +16,7 @@ class App extends Component {
             <Route exact path="/" component={SignIn} />
             <Route path="/signUp" component={SignUp} />
             <Route path="/forgotPassword" component={ForgotPassword} />>
-            {/* <Route path="/Dashboard" component={Dashboard} /> */}
+            <Route path="/Dashboard" component={Dashboard} />
             <Route>
               <h1>Invalid request</h1>
             </Route>

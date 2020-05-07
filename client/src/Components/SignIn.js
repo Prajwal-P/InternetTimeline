@@ -32,10 +32,10 @@ class SignIn extends Component {
                 res => {
                     // console.log(res);
                     if (res.status === 200) {
-                        var data = res.data;
-                        console.log(data);
-                        alert(`Logged in successfully`);
-                        // this.props.history.push('/Dashboard', { data });
+                        // var data = res.data;
+                        // console.log(data);
+                        // alert(`Logged in successfully`);
+                        this.props.history.push('/Dashboard');
                     }
                     else {
                         alert(res.message);

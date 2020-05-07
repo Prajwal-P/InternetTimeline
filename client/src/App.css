@@ -17,6 +17,9 @@ body{
 .btn-link:hover, .btn-link:focus, .btn-link:active, .btn-link.active, .open>.dropdown-toggle.btn-link {
     color: #31903b;
 }
+.btn-link-sec:hover, .btn-link-sec:focus, .btn-link-sec:active, .btn-link-sec.active, .open>.dropdown-toggle.btn-link-sec {
+    color: #ac4c4b;
+}
 .custom-btn{
     background-color: #65c168;
     border: solid 1px #65c168;
@@ -44,14 +47,18 @@ body{
 
 /* one-line-css */
 .font-col{color: #65c168;}
+.font-sec-col{color: #e17b77;}
+.font-white{color: white;}
+.background-col{background-color: #65c168;}
 .bold{font-weight: bold;}
 .btn-link{color: #65c168; padding: 0px;}
+.btn-link-sec{color: #e17b77; padding: 0px;}
 .bold{font-weight: bold;}
-
 .m-16{margin: 1rem;}
 .m-64{margin: 4rem;}
 .mt-32{margin-top: 2rem;}
 .mb-32{margin-bottom: 2rem;}
 .mb-64{margin-bottom: 4rem;}
+.ml-100{margin-left: 100%;}
 .p-0{padding: 0rem;}
-
+.insert-btn{width: 200px; margin-left: calc(100% - 226px); margin-top: 20px;}
