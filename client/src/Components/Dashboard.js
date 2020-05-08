@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Timeline from './Timeline.js'
+import Timeline from './Timeline.js';
+import NavBar from './NavBar.js';
 
 class Dashboard extends Component {
 	constructor(props) {
@@ -7,11 +8,15 @@ class Dashboard extends Component {
 		this.state = {};
 	}
 
+	insert = () => {
+		this.props.history.push('/insert')
+	}
+
 	render() {
 		return (
 			<React.Fragment>
-				<h1 className="background-col bold text-center p-2">Internet Timeline</h1>
-				<button className="custom-btn-sec text-center insert-btn">Insert a timeline record</button>
+				<NavBar/>
+				<button className="custom-btn-sec text-center insert-btn" onClick={this.insert}>Insert a timeline record</button>
 				<div>
 					<Timeline data={this.state.timelineData} />
 				</div>

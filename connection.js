@@ -24,9 +24,9 @@ conn.connect(function(err) {
     let timeline = `CREATE TABLE IF NOT EXISTS timeline(
                         name VARCHAR(20) NOT NULL,
                         year YEAR NOT NULL,
-                        img_url VARCHAR(50) NOT NULL,
-                        description VARCHAR(50) NOT NULL,
-                        link VARCHAR(50) NOT NULL,
+                        img_url VARCHAR(500) NOT NULL,
+                        description VARCHAR(100) NOT NULL,
+                        link VARCHAR(500) NOT NULL,
                     PRIMARY KEY (name));`
 
     conn.query(user, function(err, result){
