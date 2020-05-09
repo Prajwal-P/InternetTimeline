@@ -134,4 +134,18 @@ router.get('/allEvents', function (req, res) {
 	});
 });
 
+router.get('/signout', function(req, res) {
+	let email = req.query.email;
+	console.log(email);
+	
+	sql = "UPDATE users set auth_key = null where email ='"+ email +"';";
+	mysqlConnection.query(sql, function(error, rows){
+		if (error) {
+			res.send('error in query');
+		} else {
+			res.send({ data: "", status: 200, message: 'Signed out' });
+		}
+	});
+})
+
 module.exports = router;

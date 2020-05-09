@@ -15,7 +15,7 @@ class Insert extends Component {
 		};
 	}
 
-	componentWillMount = () => {
+	componentDidMount = () => {
 		if (!isAuthed) this.props.history.push('/')
 	}
 

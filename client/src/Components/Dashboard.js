@@ -13,7 +13,7 @@ class Dashboard extends Component {
 		this.props.history.push('/insert')
 	}
 
-	componentWillMount = () => {
+	componentDidMount = () => {
 		if(!isAuthed) this.props.history.push('/')
 	}
 

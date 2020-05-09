@@ -14,7 +14,7 @@ class SignIn extends Component {
 
 	callback = (result) => {
 		// console.log(result);
-		console.log(isAuthed);
+		// console.log(isAuthed);
 		if(result){
 			this.props.history.push('/Dashboard')
 		}
@@ -29,7 +29,7 @@ class SignIn extends Component {
 	}
 
 	componentDidMount = () => {
-		console.log(isAuthed);
+		// console.log(isAuthed);
 		if(isAuthed)
 			this.props.history.push('/Dashboard')
 	}

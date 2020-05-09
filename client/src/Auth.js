@@ -3,8 +3,6 @@ let email = '';
 let first_name = '';
 
 function signin(email, password, callback){
-	// e.preventDefault();
-
 	var data = new FormData();
 	data.append("email", email);
 	data.append("password", password);
@@ -26,22 +24,41 @@ function signin(email, password, callback){
 					isAuthed = true;
 					email = data.email;
 					first_name = data.first_name;
-					// console.log(this.state);
 					// alert(`Logged in successfully`);
-				}
-				else {
+				} else {
 					alert(res.message);
 					isAuthed = false;
 					email = '';
 					first_name = '';
 				}
-				// console.log(email);
+				console.log(email);
 				// console.log(first_name);
-				
 				callback(isAuthed)
 			}
 		)
 		.catch(error => console.log('Error', error));
 }
 
-export {isAuthed, email, first_name, signin}
+function signout(){
+	var requestOptions = {
+		method: 'GET',
+		redirect: 'follow'
+	};
+	console.log(email);
+	
+	fetch(`http://localhost:8888/route/signout?email=${email}`, requestOptions)
+		.then(result => result.json())
+		.then(
+			res => {
+				if(res.status === 200){
+					isAuthed = false
+					email = ''
+					first_name = ''
+				}
+				console.log(`*****${isAuthed}*****`);
+			}
+		)
+		.catch(error => console.log('error', error));
+}
+
+export {isAuthed, email, first_name, signin, signout}

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import userIcon from '../Resources/USERicon.jpg';
+import { signout } from '../Auth.js'
 
 class MyNav extends Component {
 	constructor(props) {
@@ -7,8 +8,9 @@ class MyNav extends Component {
 		this.state = {};
 	}
 
-	signOut = e => {
-		console.log(this.props);
+	click = e => {
+		signout()
+		window.location.reload(false)
 	}
 
 	render() {
@@ -18,7 +20,7 @@ class MyNav extends Component {
 				<div className="background-col p-2 nav-bar">
 					<h1 className="bold m-0 heading">Internet Timeline</h1>
 					<img className="icon border-radius-50" src={userIcon} alt="#" />
-					<button className="background-col" onClick={this.signOut}>Sign Out</button>
+					<button className="background-col" onClick={this.click}>Sign Out</button>
 				</div>
 			</React.Fragment>
 		);
