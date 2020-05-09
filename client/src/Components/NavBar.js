@@ -18,7 +18,7 @@ class MyNav extends Component {
 				<div className="background-col p-2 nav-bar">
 					<h1 className="bold m-0 heading">Internet Timeline</h1>
 					<img className="icon border-radius-50" src={userIcon} alt="#" />
-					<a className="sign-out" onClick={this.signOut}>Sign Out</a>
+					<button className="background-col" onClick={this.signOut}>Sign Out</button>
 				</div>
 			</React.Fragment>
 		);

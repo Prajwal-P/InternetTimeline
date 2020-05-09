@@ -50,7 +50,7 @@ router.post('/signin', upload.none(), function (req, res) {
 						sql = "select * from users where email ='" + email + "'";
 						mysqlConnection.query(sql, function (error, result) {
 							if(error) console.log(error)
-							else res.json({ data: result[0].auth_key, status: 200, message: 'signed in' });
+							else res.json({ data: { email: result[0].email, first_name: result[0].first_name }, status: 200, message: 'signed in' });
 						})
 					} else {
 						sql = "UPDATE users set auth_key = null WHERE email = '"+ email +"'";
@@ -60,7 +60,7 @@ router.post('/signin', upload.none(), function (req, res) {
 						sql = "select * from users where email ='" + email + "'";
 						mysqlConnection.query(sql, function (error, result) {
 							if (error) console.log(error)
-							else res.json({ data: result[0].auth_key, status: 401, message: 'Previous session was not signed out properly.\nSign in again' });
+							else res.json({ data: null, status: 401, message: 'Previous session was not signed out properly.\nSign in again' });
 						})
 					}
 				}
