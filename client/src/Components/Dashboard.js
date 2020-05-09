@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Timeline from './Timeline.js';
 import NavBar from './NavBar.js';
+import { isAuthed } from '../Auth.js';
 
 class Dashboard extends Component {
 	constructor(props) {
@@ -10,6 +11,10 @@ class Dashboard extends Component {
 
 	insert = () => {
 		this.props.history.push('/insert')
+	}
+
+	componentWillMount = () => {
+		if(!isAuthed) this.props.history.push('/')
 	}
 
 	render() {

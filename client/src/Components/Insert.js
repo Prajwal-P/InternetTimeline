@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import NavBar from './NavBar.js'
 import { Form, Row, Col } from 'react-bootstrap';
+import { isAuthed } from '../Auth.js'
 
 class Insert extends Component {
 	constructor(props) {
@@ -12,6 +13,10 @@ class Insert extends Component {
 			img_url: "",
 			link: ""
 		};
+	}
+
+	componentWillMount = () => {
+		if (!isAuthed) this.props.history.push('/')
 	}
 
 	changeHandler = e => {
