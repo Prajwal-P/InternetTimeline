@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Timeline from './Timeline.js';
 import NavBar from './NavBar.js';
-import { isAuthed } from '../Auth.js';
+import { user } from '../Auth.js';
 
 class Dashboard extends Component {
 	constructor(props) {
@@ -14,7 +14,7 @@ class Dashboard extends Component {
 	}
 
 	componentDidMount = () => {
-		if(!isAuthed) this.props.history.push('/')
+		if(!user.isAuthed) this.props.history.push('/')
 	}
 
 	render() {

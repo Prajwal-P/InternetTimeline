@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import NavBar from './NavBar.js'
 import { Form, Row, Col } from 'react-bootstrap';
-import { isAuthed } from '../Auth.js'
+import { user } from '../Auth.js'
 
 class Insert extends Component {
 	constructor(props) {
@@ -16,7 +16,7 @@ class Insert extends Component {
 	}
 
 	componentDidMount = () => {
-		if (!isAuthed) this.props.history.push('/')
+		if (!user.isAuthed) this.props.history.push('/')
 	}
 
 	changeHandler = e => {

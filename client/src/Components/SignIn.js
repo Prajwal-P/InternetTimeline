@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Col, Form, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { signin, isAuthed } from '../Auth.js';
+import { user } from '../Auth.js';
 
 class SignIn extends Component {
 	constructor(props) {
@@ -21,7 +21,7 @@ class SignIn extends Component {
 	}
 	onSignIn = async (e) => {
 		e.preventDefault();
-		signin(this.state.email, this.state.password, this.callback)		
+		user.signin(this.state.email, this.state.password, this.callback)		
 	}
 	changeHandler = e => {
 		this.setState({ [e.target.name]: e.target.value });
@@ -30,7 +30,7 @@ class SignIn extends Component {
 
 	componentDidMount = () => {
 		// console.log(isAuthed);
-		if(isAuthed)
+		if(user.isAuthed)
 			this.props.history.push('/Dashboard')
 	}
 

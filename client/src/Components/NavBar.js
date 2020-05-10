@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import userIcon from '../Resources/USERicon.jpg';
-import { signout } from '../Auth.js'
+import { user } from '../Auth.js'
 
 class MyNav extends Component {
 	constructor(props) {
@@ -9,7 +9,7 @@ class MyNav extends Component {
 	}
 
 	click = e => {
-		signout()
+		user.signout()
 		window.location.reload(false)
 	}
 
