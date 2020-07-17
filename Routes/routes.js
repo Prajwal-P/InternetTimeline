@@ -43,7 +43,7 @@ router.post('/signin', upload.none(), function (req, res) {
 			if(result.length > 0) {
 				if(hashedPassword === result[0].password) {
 					if(result[0].auth_key === null){
-						sql = "UPDATE users set auth_key = 123 WHERE email = '"+ email +"'";
+						sql = "UPDATE users set auth_key = now() WHERE email = '"+ email +"'";
 						mysqlConnection.query(sql, function (error, result1) {
 							if(error) console.log(error)
 						})
@@ -56,11 +56,7 @@ router.post('/signin', upload.none(), function (req, res) {
 						sql = "UPDATE users set auth_key = null WHERE email = '"+ email +"'";
 						mysqlConnection.query(sql, function (error, result1) {
 							if (error) console.log(error)
-						})
-						sql = "select * from users where email ='" + email + "'";
-						mysqlConnection.query(sql, function (error, result) {
-							if (error) console.log(error)
-							else res.json({ data: null, status: 401, message: 'Previous session was not signed out properly.\nSign in again' });
+							res.json({ data: null, status: 401, message: 'Previous session was not signed out properly.\nSign in again' });
 						})
 					}
 				}
