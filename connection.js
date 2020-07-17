@@ -1,16 +1,30 @@
 const mysql = require('mysql');
 
-var conn = mysql.createConnection({
-    host: "sql12.freesqldatabase.com",
-    user: "sql12338342",
-    password: "veBrCsaaNA",
-    database: "sql12338342"
+let connection1 = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: ""
+})
+
+let connection2 = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "",
+    database: "InternetTimeline"
 });
 
-conn.connect(function(err) {
-    if(err) throw err;
-
-    let user = `CREATE TABLE IF NOT EXISTS users(
+connection1.query("CREATE DATABASE IF NOT EXISTS InternetTimeline", (err, result) => {
+    if(err) {
+        console.log('Database not created')
+        console.log(err);
+    } else {
+        // console.log('Database created...\n\n');
+        
+        connection2.connect(function (err) {
+            if (err) {
+                console.log('Database not connected');
+            } else {
+                let user = `CREATE TABLE IF NOT EXISTS users(
                     id INT NOT NULL AUTO_INCREMENT,
                     first_name VARCHAR(20) NOT NULL,
                     last_name VARCHAR(20) NOT NULL,
@@ -21,7 +35,7 @@ conn.connect(function(err) {
                     UNIQUE (email)
                 )auto_increment = 2000;`;
 
-    let timeline = `CREATE TABLE IF NOT EXISTS timeline(
+                let timeline = `CREATE TABLE IF NOT EXISTS timeline(
                         name VARCHAR(20) NOT NULL,
                         year YEAR NOT NULL,
                         img_url VARCHAR(500) NOT NULL,
@@ -29,12 +43,18 @@ conn.connect(function(err) {
                         link VARCHAR(500) NOT NULL,
                     PRIMARY KEY (name));`
 
-    conn.query(user, function(err, result){
-        if(err) console.log(err);
-    })
-    conn.query(timeline, function(err, result){
-        if(err) console.log(err);
-    })
+                connection2.query(user, function (err, result) {
+                    if (err) console.log(err);
+                    // else console.log('Users table created');
+                })
+                connection2.query(timeline, function (err, result) {
+                    if (err) console.log(err);
+                    // else console.log('Timeline table created\n\n');
+                })
+                console.log('Database connected...\n\n');
+            }
+        })
+    }
 })
 
-module.exports = conn;
+module.exports = connection2;
