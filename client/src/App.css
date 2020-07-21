@@ -125,6 +125,15 @@ body{
 	color: #777;
 	font-size: 12px;
 	font-weight: bold;
+	position: absolute;
+	top: 5px;
+	padding: 5px;
+}
+.timeline-item:nth-child(even) .timeline-item-content time{
+	right: 10px;
+}
+.timeline-item-content img{
+	max-width: 100%;
 }
 .timeline-item-content p {
 	font-size: 16px;
@@ -143,9 +152,9 @@ body{
 	cursor: pointer;
 	width: 100%;
 }
-.timeline-item-content a::after {
+/* .timeline-item-content a::after {
 	font-size: 12px;
-}
+} */
 .timeline-item-content .circle {
 	background-color: #fff;
 	border: 3px solid #e17b77;
