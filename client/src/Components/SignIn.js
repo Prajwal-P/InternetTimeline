@@ -15,13 +15,13 @@ class SignIn extends Component {
 	callback = (result) => {
 		// console.log(result);
 		// console.log(isAuthed);
-		if(result){
+		if(result) {
 			this.props.history.push('/Dashboard')
 		}
 	}
 	onSignIn = async (e) => {
 		e.preventDefault();
-		user.signin(this.state.email, this.state.password, this.callback)		
+		user.signin(this.state.email, this.state.password, this.callback)
 	}
 	changeHandler = e => {
 		this.setState({ [e.target.name]: e.target.value });
