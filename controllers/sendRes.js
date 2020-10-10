@@ -27,7 +27,7 @@ module.exports = (s, res, data, msg) => {
 			.status(500)
 			.json({
 				STATUS: 0,
-				MESSAGE: 'ERROR ON SERVER SIDE, PLEASE TRY AGAIN'
+				MESSAGE: msg || 'ERROR ON SERVER SIDE, PLEASE TRY AGAIN'
 			})
 	}
 }

@@ -3,10 +3,13 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const router = require('./Routes/routes.js');
 const user = require('./Routes/user.js');
+var cookieParser = require("cookie-parser");
 
-const port = process.env.PORT || 8888;
+const port = process.env.PORT || 7777;
 
 var app = express();
+
+app.use(cookieParser());
 
 var corsOption = {
     origin: true,
