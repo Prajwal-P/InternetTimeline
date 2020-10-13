@@ -35,7 +35,7 @@ connection.connect((err) => {
 function handleConnection() {
 	setInterval(() => {
 		console.log(`>>>>>    Handeling connection    <<<<<\n`);
-		connection.query(`SELECT * FROM TBL_USER_DETAILS`, (err, result) => {
+		connection.query(`SELECT * FROM USERS`, (err, result) => {
 			if (err) {
 				console.log(`Invaild query\nConnection can get terminated\n`);
 			} else {
