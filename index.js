@@ -28,6 +28,14 @@ app.use(function (req, res, next) {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.use('/test', (req, res) => {
+    res.json({
+        STATUS: 1,
+        MESSAGE: 'TEST API',
+        DATA: 'SAMPLE RUN'
+    })
+})
+
 app.use('/route', router);
 app.use('/user', user);
 
