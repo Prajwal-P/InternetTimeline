@@ -7,6 +7,7 @@ const multer = require('multer');
 const upload = multer();
 
 const sendRes = require('../controllers/sendRes');
+const check = require('../middleware/checkUser');
 
 const router = express.Router();
 
@@ -155,5 +156,12 @@ router.post('/signin', upload.none(), function (req, res) {
 
 	fetchUser()
 });
+
+router.get('/check', check, (req, res) => {
+	data = {
+		USER_ID: parseInt(req.cookies.userId)
+	}
+	sendRes(1, res)
+})
 
 module.exports = router;
