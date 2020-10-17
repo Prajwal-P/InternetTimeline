@@ -112,8 +112,8 @@ router.post('/signin', upload.none(), function (req, res) {
 			// console.log('Result len of tokens: ', result.length);
 			if (result.length === 0 && _authToken) {
 				res
-					.cookie('userId', undefined)
-					.cookie('authToken', undefined)
+					.clearCookie('userId')
+					.clearCookie('authToken')
 				sendRes(0, res, undefined, 'UNAUTHORISED');
 			} else {
 				if (!_authToken){
@@ -156,6 +156,13 @@ router.post('/signin', upload.none(), function (req, res) {
 
 	fetchUser()
 });
+
+router.get('/signOut', check, (req, res) => {
+	res
+		.clearCookie('userId')
+		.clearCookie('authToken')
+	sendRes(1, res)
+})
 
 router.get('/check', check, (req, res) => {
 	data = {
