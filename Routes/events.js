@@ -33,6 +33,7 @@ const sendRes = require('../controllers/sendRes');
 const check = require('../middleware/checkUser');
 const cloudinary = require('../cloudinary');
 const fs = require('fs');
+const { send } = require('process');
 
 const router = express.Router();
 
@@ -64,6 +65,22 @@ router.post('/insert', check, upload.single('image'), async (req, res) => {
 		})
 	}
 
+})
+
+router.get('/allEvents', (req, res) => {
+	sql = "SELECT * FROM EVENTS ORDER BY YEAR ASC, NAME ASC;";
+	mysqlConnection.query(sql, (err, result) => {
+		if (err)
+			sendRes(-1, res);
+		else {
+			if (result <= 0)
+				res
+					.status(404)
+					.json({ data: [], status: 404, message: "No data found " });
+			else
+				sendRes(1, res, result, 'OK')
+		}
+	});
 })
 
 module.exports = router;
