@@ -1,60 +1,53 @@
 const mysql = require('mysql');
+const queries = require('./tables');
 
-let connection1 = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: ""
-})
-
-let connection2 = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "",
-    database: "InternetTimeline"
+let connection = mysql.createConnection({
+    host: "remotemysql.com",
+    user: "iYgECwNZCY",
+    password: "I9VuKhVHse",
+    database: "iYgECwNZCY"
 });
 
-connection1.query("CREATE DATABASE IF NOT EXISTS InternetTimeline", (err, result) => {
-    if(err) {
-        console.log('Database not created')
-        console.log(err);
-    } else {
-        // console.log('Database created...\n\n');
-        
-        connection2.connect(function (err) {
-            if (err) {
-                console.log('Database not connected');
-            } else {
-                let user = `CREATE TABLE IF NOT EXISTS users(
-                    id INT NOT NULL AUTO_INCREMENT,
-                    first_name VARCHAR(20) NOT NULL,
-                    last_name VARCHAR(20) NOT NULL,
-                    email VARCHAR(30) NOT NULL,
-                    password VARCHAR(100) NOT NULL,
-                    auth_key DATETIME DEFAULT NULL,
-                    PRIMARY KEY (id),
-                    UNIQUE (email)
-                )auto_increment = 2000;`;
+// let connection = mysql.createConnection({
+// 	host: "localhost",
+// 	user: "root",
+// 	password: "",
+// 	database: "InternetTimeline"
+// });
 
-                let timeline = `CREATE TABLE IF NOT EXISTS timeline(
-                        name VARCHAR(20) NOT NULL,
-                        year YEAR NOT NULL,
-                        img_url VARCHAR(500) NOT NULL,
-                        description VARCHAR(100) NOT NULL,
-                        link VARCHAR(500) NOT NULL,
-                    PRIMARY KEY (name));`
-
-                connection2.query(user, function (err, result) {
-                    if (err) console.log(err);
-                    // else console.log('Users table created');
-                })
-                connection2.query(timeline, function (err, result) {
-                    if (err) console.log(err);
-                    // else console.log('Timeline table created\n\n');
-                })
-                console.log('Database connected...\n\n');
-            }
-        })
-    }
+connection.connect((err) => {
+	if (err) {
+		console.log('Database not connected');
+	} else {
+		queries.map((query, i) => {
+			// , (err, result) => {
+			// 	if (err) console.log(`Table ${i} :-\n${err}`);
+			// 	else console.log(`Table ${i} :-\n${result}`);
+			// }
+			connection.query(query)
+			if (i === queries.length - 1) {
+				console.log('Database connected...\n');
+			}
+		})
+	}
 })
 
-module.exports = connection2;
+function handleConnection() {
+	setInterval(() => {
+		console.log(`>>>>>    Handeling connection    <<<<<\n`);
+		connection.query(`SELECT * FROM USERS`, (err, result) => {
+			if (err) {
+				console.log(`Invaild query\nConnection can get terminated\n`);
+			} else {
+				console.log(`Connection handled\n`);
+				// console.log(`Result of query :-\n`);
+				// console.log(result);
+				// console.log(`\n----------------------------------------\n`);
+			}
+		})
+	}, 1000 * 60 * 4)
+}
+
+handleConnection();
+
+module.exports = connection;
