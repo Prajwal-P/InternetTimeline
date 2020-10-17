@@ -4,11 +4,17 @@ const cors = require('cors');
 const router = require('./Routes/routes.js');
 const user = require('./Routes/user.js');
 const event = require('./Routes/events.js');
-var cookieParser = require("cookie-parser");
+const cookieParser = require("cookie-parser");
+const fs = require('fs');
 
 const port = process.env.PORT || 7777;
 
 var app = express();
+
+let dir = './buffer';
+if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir);
+}
 
 app.use(cookieParser());
 
