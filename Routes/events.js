@@ -38,7 +38,7 @@ const router = express.Router();
 
 let sql;
 
-router.post('/insert', upload.single('image'), check, async (req, res) => {
+router.post('/insert', check, upload.single('image'), async (req, res) => {
 	const { name, year, description, link } = req.body;
 	let image;
 
@@ -49,9 +49,15 @@ router.post('/insert', upload.single('image'), check, async (req, res) => {
 		sql = `INSERT INTO EVENTS(NAME, YEAR, IMG_URL, DESCRIPTION, LINK) VALUES ('${name}', ${year}, '${image.url}', '${description}', '${link}');`;
 		mysqlConnection.query(sql, (err, result) => {
 			if(err) {
-				console.log('Error in inerting to DB');
-				console.log(err);
-				sendRes(-1, res)
+				if(err.code = 'ER_DUP_ENTRY') {
+					console.log('Inserting duplicate event');
+					console.log(err);
+					sendRes(-1, res, undefined, 'INSERTING DUPLICATE EVENT')
+				} else {
+					console.log('Error in inerting to DB');
+					console.log(err);
+					sendRes(-1, res)
+				}
 			} else {
 				sendRes(1, res)
 			}
