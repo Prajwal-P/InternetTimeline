@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const router = require('./Routes/routes.js');
 const user = require('./Routes/user.js');
+const event = require('./Routes/events.js');
 var cookieParser = require("cookie-parser");
 
 const port = process.env.PORT || 7777;
@@ -38,5 +39,6 @@ app.use('/test', (req, res) => {
 
 app.use('/route', router);
 app.use('/user', user);
+app.use('/event', event);
 
 app.listen(port, () => console.log(`Listening on port ${port}...`));

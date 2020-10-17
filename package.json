@@ -22,6 +22,7 @@
   "homepage": "https://github.com/Prajwal-P/InternetTimeline#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "cloudinary": "^1.23.0",
     "concurrently": "^5.2.0",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
